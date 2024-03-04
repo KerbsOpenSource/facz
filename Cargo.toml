@@ -1,0 +1,19 @@
+[package]
+name = "facz"
+version = "0.1.0"
+edition = "2021"
+authors = ["Vadim Kerbs <opensource@kerbs.dev>"]
+repository = "https://github.com/KerbsOpenSource/facz"
+description = "File Auto Copy"
+readme = "README.md"
+license-file = "LICENSE"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+
+[profile.release]
+strip = true
+lto = true
+panic = "abort"
