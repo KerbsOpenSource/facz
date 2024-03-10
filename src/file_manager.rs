@@ -21,6 +21,20 @@ fn dir_exists(path: &Path) {
     }
 }
 
+fn create_missing_dir(path: &Path) {
+    dir_exists(&path.with_file_name(""));
+}
+
+fn file_checks(from: &Path, to: &Path) {
+    if !file_exists(to) {
+        create_missing_dir(to);
+        copy_file(from, to);
+    };
+    if !sha256_comparison_file(from, to) {
+        copy_file(from, to);
+    }
+}
+
 fn folder_checks(from_path: &Path, to_path: &Path) {
     for object in WalkDir::new(from_path)
         .into_iter()
@@ -30,13 +44,7 @@ fn folder_checks(from_path: &Path, to_path: &Path) {
         let object_relative_path = object_path.strip_prefix(from_path).unwrap();
         if object_path.is_file() {
             let save_file_path = to_path.join(object_relative_path);
-            if !file_exists(&save_file_path) {
-                dir_exists(&save_file_path.with_file_name(""));
-                copy_file(&object_path, &save_file_path);
-            };
-            if !sha256_comparison_file(&object_path, &save_file_path) {
-                copy_file(&object_path, &save_file_path);
-            }
+            file_checks(&object_path, &save_file_path);
         };
     }
 }
