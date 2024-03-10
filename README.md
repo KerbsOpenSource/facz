@@ -11,3 +11,13 @@ Options:
   -h, --help         Print help
   -V, --version      Print version
 ```
+
+## 🔨 How to build
+```
+git clone https://github.com/KerbsOpenSource/facz
+cd facz
+cargo build -r
+```
+
+### License
++ MIT License ([LICENSE file](./LICENSE) or http://opensource.org/licenses/MIT)
