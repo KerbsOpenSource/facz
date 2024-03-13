@@ -24,7 +24,5 @@ fn sha256_digest(path: &Path) -> String {
 }
 
 pub fn sha256_comparison_file(first_path: &Path, second_file: &Path) -> bool {
-    let first_sha = sha256_digest(first_path);
-    let second_sha = sha256_digest(second_file);
-    first_sha == second_sha
+    sha256_digest(first_path) == sha256_digest(second_file)
 }

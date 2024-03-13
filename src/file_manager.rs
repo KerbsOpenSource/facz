@@ -50,9 +50,10 @@ fn folder_checks(from_path: &Path, to_path: &Path) {
 }
 
 pub fn start_copying(from_path: &Path, to_path: &Path) {
-    if !from_path.is_dir() {
+    if from_path.is_dir() {
+        dir_exists(to_path);
+        folder_checks(from_path, to_path);
+    } else {
         panic!("The folder to copy from does not exist")
-    };
-    dir_exists(to_path);
-    folder_checks(from_path, to_path);
+    }
 }
